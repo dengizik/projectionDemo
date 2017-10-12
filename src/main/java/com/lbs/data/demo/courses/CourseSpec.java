@@ -7,23 +7,30 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class CourseSpec implements Specification<Course> {
+//public class CourseSpec implements Specification<Course> {
 
-    private Course filter;
+//    private Course filter;
+//
+//    public CourseSpec (Course filter) {
+//        super();
+//        this.filter = filter;
+//    }
+//            @Override
+//            public Predicate toPredicate(Root<Course> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+//                Predicate p = criteriaBuilder.disjunction();
+//
+//                if(filter.getId() != null) {
+//                        p.getExpressions().add(criteriaBuilder.equal(root.get(("id")),filter.getId()));
+//                }
+//            return p;
+//            }
 
-    public CourseSpec (Course filter) {
-        super();
-        this.filter = filter;
+
+public class CourseSpec {
+    public static Specification<Course> idEq(String id){
+        return (root, query, cb) -> cb.equal(root.get(Course_.id),id);
     }
-            @Override
-            public Predicate toPredicate(Root<Course> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                Predicate p = criteriaBuilder.disjunction();
+}
 
-                if(filter.getId() != null) {
-                        p.getExpressions().add(criteriaBuilder.equal(root.get(("id")),filter.getId()));
-                }
-            return p;
-            }
-        }
 
 

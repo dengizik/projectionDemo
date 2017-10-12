@@ -36,8 +36,8 @@ public class DemoApplicationTests {
 
 	@Test
 	public void specificationWithProjection() {
-
-		Page<CourseRepository.CourseWithoutParent> all = courseRepository.findAll(courseSpec,CourseRepository.CourseWithoutParent.class, null);
+		Specification<Course> where= Specifications.where(CourseSpec.idEq("java"));
+		Page<CourseRepository.CourseWithoutParent> all = courseRepository.findAll(where,CourseRepository.CourseWithoutParent.class, null);
 		Assertions.assertThat(all).isNotEmpty();
 		System.out.println(all.getContent());
 	}

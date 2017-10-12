@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithProjection;
 
 import java.util.List;
-
+//deneme
 //public interface CourseRepository extends JpaRepository<Course, String>, JpaSpecificationExecutor<Course> {//interface olması ne kadar ilginç
     public interface CourseRepository extends JpaRepository<Course, String>, JpaSpecificationExecutorWithProjection<Course> {//interface olması ne kadar ilginç
 
