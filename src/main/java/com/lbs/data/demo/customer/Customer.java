@@ -1,11 +1,11 @@
-package com.lbs.data.demo.topic;
+package com.lbs.data.demo.customer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Topic {
+public class Customer {
 
     @Id
     @Column(name = "ID")
@@ -13,11 +13,11 @@ public class Topic {
     private String name;
     private String description;
 
-    public Topic() {
+    public Customer() {
 
     }
 
-    public Topic(String id, String name, String description) {
+    public Customer(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

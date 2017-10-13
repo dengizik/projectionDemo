@@ -16,4 +16,8 @@ public interface TopicRepository extends JpaRepository<Topic,String>,JpaSpecific
         String getName();
 }
 
+    List<TopicSimple> findById(String id);
+
+
+
 }
