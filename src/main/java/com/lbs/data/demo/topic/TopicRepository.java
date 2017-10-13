@@ -1,16 +1,19 @@
 package com.lbs.data.demo.topic;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithProjection;
 
-public interface TopicRepository extends CrudRepository<Topic, String> {//interface olması ne kadar ilginç
-    //crudrepository is a generic type
-    //all common methods below have type information
-    //<Entity type, id type>
+import java.util.List;
 
-    //getAllTopics()
-    //getTopic(String id)
-    //updateTopic(Topic t)
-    //deleteTopic(String id)
-    //instead of these use crud repo
+@Repository
+public interface TopicRepository extends JpaRepository<Topic,String>,JpaSpecificationExecutorWithProjection<Topic> {//interface olması ne kadar ilginç
+//public interface TopicRepository extends JpaRepository<Topic,String>, JpaSpecificationExecutor<Topic> {
+    public static interface TopicSimple{
+        String getId();
+        String getName();
+}
 
 }

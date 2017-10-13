@@ -8,6 +8,8 @@ import th.co.geniustree.springdata.jpa.repository.support.JpaSpecificationExecut
 
 @SpringBootApplication
 @EnableJpaRepositories(repositoryBaseClass = JpaSpecificationExecutorWithProjectionImpl.class)
+@ComponentScan(basePackages = {"com.lbs.data.demo"})
+
 public class DemoApplication {
 
 	public static void main(String[] args) {
