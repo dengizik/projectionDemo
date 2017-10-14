@@ -5,6 +5,7 @@ import com.lbs.data.demo.topic.Topic;
 import com.lbs.data.demo.topic.TopicRepository;
 import com.lbs.data.demo.topic.TopicSpec;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +21,27 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest (classes = DemoApplication.class)
+@SpringBootTest(classes = DemoApplication.class)
 public class DemoApplicationTests {
 
 //	@Autowired
 //	private CourseRepository courseRepository;
 
 
-	@Autowired
-	private TopicRepository topicRepository;
+    @Autowired
+    private TopicRepository topicRepository;
 
-	@Test
-	public void contextLoads() {
-	}
+    @Before
+    public void init() {
+        Topic topic = new Topic();
+        topic.setId("İki");
+        topic.setName("Hello");
+        topicRepository.save(topic);
+    }
+
+    @Test
+    public void contextLoads() {
+    }
 
 //	@Test
 //	public void specificationWithProjection() {
@@ -43,12 +52,13 @@ public class DemoApplicationTests {
 //	}
 
 
-	@Test
-	public void specificationWithProjection() {
-		Specification<Topic> where= Specifications.where(TopicSpec.idEq("İki"));
-//		Page<TopicRepository.TopicSimple> all = topicRepository.findAll(where,TopicRepository.TopicSimple.class, new PageRequest(0,10));
-		List<Topic> all = topicRepository.findAll(where);
-		Assertions.assertThat(all).isNotEmpty();
+    @Test
+    public void specificationWithProjection() {
+        Specification<Topic> where = Specifications.where(TopicSpec.idEq("İki"));
+        Page<TopicRepository.TopicSimple> all = topicRepository.findAll(where, TopicRepository.TopicSimple.class, new PageRequest(0, 10));
+        //List<Topic> all = topicRepository.findAll(where);
+        Assertions.assertThat(all).isNotEmpty();
+        Assertions.assertThat(all.getContent().get(0).getName()).isNotEmpty();
 //		System.out.println(all.getContent());
 
 
@@ -61,7 +71,7 @@ public class DemoApplicationTests {
 //		Assertions.assertThat(all).isNotEmpty();
 
 
-	}
+    }
 
 //	ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
 //
@@ -87,7 +97,6 @@ public class DemoApplicationTests {
 //
 //
 //	}
-
 
 
 }
