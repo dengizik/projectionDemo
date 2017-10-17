@@ -5,6 +5,7 @@ import com.lbs.data.demo.topic.Topic;
 import com.lbs.data.demo.topic.TopicRepository;
 import com.lbs.data.demo.topic.TopicSpec;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -29,6 +31,16 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private TopicRepository topicRepository;
+
+	@Before
+    public void init() {
+
+		Topic topic = new Topic();
+		topic.setId("İki");
+		topic.setName("Hello");
+		topicRepository.save(topic); }
+
+
 
 	@Test
 	public void contextLoads() {
@@ -45,51 +57,20 @@ public class DemoApplicationTests {
 
 	@Test
 	public void specificationWithProjection() {
-		Specification<Topic> where= Specifications.where(TopicSpec.idEq("İki"));
+//		Specification<Topic> where = Specifications.where(TopicSpec.idEq("İki"));
 //		Page<TopicRepository.TopicSimple> all = topicRepository.findAll(where,TopicRepository.TopicSimple.class, new PageRequest(0,10));
-		List<Topic> all = topicRepository.findAll(where);
-		Assertions.assertThat(all).isNotEmpty();
-//		System.out.println(all.getContent());
+//		Iterator<TopicRepository.TopicSimple> anIterator = all.iterator();
+//		while (anIterator.hasNext()){
+//			System.out.println("anIterator.next().getId(): " +anIterator.next().getId());
+//			System.out.println("anIterator.next().getName()" + anIterator.next().getName());
+//		}
 
-
-//		Topic filter = new Topic();
-//		filter.setId("Bir");
-//
-//		Specification<Topic> topicSpecification = new AnotherTopicSpec(filter);
-//
-//		List<Topic> all = topicRepository.findAll(topicSpecification);
-//		Assertions.assertThat(all).isNotEmpty();
-
-
+		List<TopicRepository.TopicSimple> result = topicRepository.findById("İki");
+		while(result.iterator().hasNext()){
+			System.out.println("result.iterator().next().getName(): " + result.iterator().next().getName());
+			System.out.println("result.iterator().next().getId(): " + result.iterator().next().getId());
+		}
 	}
-
-//	ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
-//
-//	@Test
-//	public void testProjection(){
-//		Customer customer = factory.createProjection(Customer.class);
-//		customer.setId("Ali");
-//		customer.setName("Veli");
-//
-//		Assertions.assertThat(customer.getId()).isEqualTo("Ali");
-//
-//	}
-//
-//	interface Customer {
-//
-//		String getId();
-//
-//		void setId(String id);
-//
-//		String getName();
-//
-//		void setName(String name);
-//
-//
-//	}
-
-
-
 }
 
 

@@ -8,6 +8,7 @@ import th.co.geniustree.springdata.jpa.repository.JpaSpecificationExecutorWithPr
 
 import java.util.List;
 
+
 @Repository
 public interface TopicRepository extends JpaRepository<Topic,String>,JpaSpecificationExecutorWithProjection<Topic> {//interface olması ne kadar ilginç
 //public interface TopicRepository extends JpaRepository<Topic,String>, JpaSpecificationExecutor<Topic> {
