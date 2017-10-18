@@ -10,6 +10,10 @@ public class UberClass {
     //bi paketteki bütün class'ları scan edip (component scan gibi) onların interface'lerini oluşturma olabilir
 // ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfig.class);
 
+    //entity'ler kendilerini işaretlese projection'ı olacak mı olmayacak mı diye (@DenizAnnotation)
+    //işaretli entity'ler servis katmanında kendilerini registerme metoduyla register etse
+    // scan edilip repo'ları üzerinden simple versiyonlarına ulaşılsa
+
     HashMap registeringHashMap = new HashMap();//global olsun
        // hashMap
 

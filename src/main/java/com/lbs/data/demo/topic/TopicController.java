@@ -1,6 +1,7 @@
 package com.lbs.data.demo.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,11 @@ public class TopicController {
     public List<Topic> getAllTopics(){
 
         return topicService.getAllTopics();
+    }
+
+    @RequestMapping(value = "/topicsSimple/{id}", method = RequestMethod.GET)
+    public Page<TopicRepository.TopicSimple> getAllSimpleTopics(@PathVariable String id){
+        return topicService.getAllSimpleTopics(id);
     }
 
     @RequestMapping(value= "/topic/{id}", method = RequestMethod.GET)

@@ -4,11 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+
 @Entity
+@ProjectionWithSpecification (interfaceClass = "com.lbs.data.demo.topic.TopicRepository.TopicSimple")
 public class Topic {
 
     @Id
     @Column(name = "ID")
+    //ya da bu field'leri işaretle (bu daha zor)
     private String id;
     private String name;
     private String description;
@@ -21,6 +24,7 @@ public class Topic {
         this.id = id;
         this.name = name;
         this.description = description;
+
     }
 
 
