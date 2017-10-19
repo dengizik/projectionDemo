@@ -1,9 +1,6 @@
 package com.lbs.data.demo;
 
-import com.lbs.data.demo.topic.AnotherTopicSpec;
-import com.lbs.data.demo.topic.Topic;
-import com.lbs.data.demo.topic.TopicRepository;
-import com.lbs.data.demo.topic.TopicSpec;
+import com.lbs.data.demo.topic.*;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +33,8 @@ public class DemoApplicationTests {
     public void init() {
 
 		Topic topic = new Topic();
-		topic.setId("İki");
-		topic.setName("Hello");
+		topic.setId("Bir");
+		topic.setName("Java Topic");
 		topicRepository.save(topic); }
 
 
@@ -59,13 +56,10 @@ public class DemoApplicationTests {
 	public void specificationWithProjection() {
 //		Specification<Topic> where = Specifications.where(TopicSpec.idEq("İki"));
 //		Page<TopicRepository.TopicSimple> all = topicRepository.findAll(where,TopicRepository.TopicSimple.class, new PageRequest(0,10));
-//		Iterator<TopicRepository.TopicSimple> anIterator = all.iterator();
-//		while (anIterator.hasNext()){
-//			System.out.println("anIterator.next().getId(): " +anIterator.next().getId());
-//			System.out.println("anIterator.next().getName()" + anIterator.next().getName());
-//		}
 
-		List<TopicRepository.TopicSimple> result = topicRepository.findById("İki");
+
+		//List<TopicRepository.TopicSimple> result = topicRepository.findById("İki");
+		List<TopicSimpleOuter> result = topicRepository.findById("Bir");
 		while(result.iterator().hasNext()){
 			System.out.println("result.iterator().next().getName(): " + result.iterator().next().getName());
 			System.out.println("result.iterator().next().getId(): " + result.iterator().next().getId());

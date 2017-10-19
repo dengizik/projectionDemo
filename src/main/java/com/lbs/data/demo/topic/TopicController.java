@@ -19,7 +19,7 @@ public class TopicController {
     }
 
     @RequestMapping(value = "/topicsSimple/{id}", method = RequestMethod.GET)
-    public Page<TopicRepository.TopicSimple> getAllSimpleTopics(@PathVariable String id){
+    public Page<TopicSimpleOuter> getAllSimpleTopics(@PathVariable String id){
         return topicService.getAllSimpleTopics(id);
     }
 

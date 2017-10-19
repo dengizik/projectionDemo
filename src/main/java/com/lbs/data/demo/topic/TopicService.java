@@ -3,6 +3,7 @@ package com.lbs.data.demo.topic;
 import com.lbs.data.demo.UberClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
@@ -45,24 +46,29 @@ public class TopicService {
         return topics;
     }
 
-    public Page<TopicRepository.TopicSimple> getAllSimpleTopics(String id){
+    public Page<TopicSimpleOuter> getAllSimpleTopics(String id){
         topic = new Topic();
         Class c = topic.getClass();
         Annotation an = c.getAnnotation(ProjectionWithSpecification.class);//get C's ProjectionWithSpec Annotation
         ProjectionWithSpecification projectionWithSpecification = (ProjectionWithSpecification) an;
         System.out.println(projectionWithSpecification.interfaceClass());
-        String projectionName = projectionWithSpecification.interfaceClass();
+//        String projectionName = projectionWithSpecification.interfaceClass();
+
         Class<?> entityClass = null;
+        //String projectionName = "com.lbs.data.demo.topic.TopicRepository$TopicSimple";
+        String projectionName = "com.lbs.data.demo.topic.TopicSimpleOuter";
         try{
-            entityClass = Class.forName(projectionName);
-        }catch (Exception e){
+             entityClass = Class.forName(projectionName);
+        }catch (ClassNotFoundException e){
             System.out.println("olmadı");
+            System.out.println(e);
         }
 
         Specification<Topic> where = Specifications.where(TopicSpec.idEq(id));
 		//Page<TopicRepository.TopicSimple> all = topicRepository.findAll(where,TopicRepository.TopicSimple.class, new PageRequest(0,10));
-        Page<?> all = topicRepository.findAll(where,entityClass.getClass(), new PageRequest(0,10));
-        return (Page <TopicRepository.TopicSimple>) all;
+        Page<?> all =  topicRepository.findAll(where,entityClass.getClass(), new PageRequest(0,10));
+        //Page<?> all = new PageImpl<>(topicRepository.findById(id));//bu çalışıyor
+        return (Page <TopicSimpleOuter>) all;
     }
 
 
