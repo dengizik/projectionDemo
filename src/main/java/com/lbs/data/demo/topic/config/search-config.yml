@@ -1,0 +1,8 @@
+restEndPoints:
+  - autoCompleteId: topic
+    entityName: Topic
+    listFields:
+        - id
+        - name
+    keyFields:
+        - name

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 
 
 @Entity
-@ProjectionWithSpecification (interfaceClass = "com.lbs.data.demo.topic.TopicSimpleOuter")
+@ProjectionWithSpecification (projector = "com.lbs.data.demo.topic.TopicSimpleOuter")
 public class Topic {
 
     @Id

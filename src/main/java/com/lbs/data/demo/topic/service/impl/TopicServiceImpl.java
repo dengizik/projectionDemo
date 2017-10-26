@@ -15,19 +15,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class TopicService {
+public class TopicServiceImpl implements TopicService {
 
     @Autowired
-    private TopicRepository topicRepository;
+    private TopicDAO topicDAO;
 
     @Autowired
     private UberClass uberClass;
 
 
-    private Topic topic;
-
-
-
+    private Topic topic; //TODO: @autowired
 
 
     //işaretli entity (kendisini bu şekilde register edebilir)
@@ -42,7 +39,7 @@ public class TopicService {
 
 
         List<Topic> topics = new ArrayList<>();
-        topicRepository.findAll().forEach(topics::add);
+        topicDAO.findAll().forEach(topics::add);
         return topics;
     }
 
@@ -51,43 +48,53 @@ public class TopicService {
         Class c = topic.getClass();
         Annotation an = c.getAnnotation(ProjectionWithSpecification.class);//get C's ProjectionWithSpec Annotation
         ProjectionWithSpecification projectionWithSpecification = (ProjectionWithSpecification) an;
-        System.out.println(projectionWithSpecification.interfaceClass());
-//        String projectionName = projectionWithSpecification.interfaceClass();
-
+        System.out.println(projectionWithSpecification.projector());
         Class<?> entityClass = null;
-        //String projectionName = "com.lbs.data.demo.topic.TopicRepository$TopicSimple";
-        String projectionName = "com.lbs.data.demo.topic.TopicSimpleOuter";
         try{
-             entityClass = Class.forName(projectionName);
+             entityClass = Class.forName(projectionWithSpecification.projector());
         }catch (ClassNotFoundException e){
-            System.out.println("olmadı");
+            System.out.println("customException");
             System.out.println(e);
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
         Specification<Topic> where = Specifications.where(TopicSpec.idEq(id));
-		//Page<TopicRepository.TopicSimple> all = topicRepository.findAll(where,TopicRepository.TopicSimple.class, new PageRequest(0,10));
-        Page<?> all =  topicRepository.findAll(where,entityClass.getClass(), new PageRequest(0,10));
+       //java.lang.IllegalArgumentException: Projection type must be an interface” Error
+        Page<?> all = null;
+        try{
+            all =  topicDAO.findAll(where,entityClass, new PageRequest(0,10));
+        }catch(IllegalArgumentException e){
+            System.out.println("another custom exception");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         //Page<?> all = new PageImpl<>(topicRepository.findById(id));//bu çalışıyor
-        return (Page <TopicSimpleOuter>) all;
+        if (all != null){
+            return (Page <TopicSimpleOuter>) all;
+        }
+        return (Page <TopicSimpleOuter>) all; //TODO: burayı nasıl döndürsem?
+
     }
 
 
     public Topic getTopic(String id){
 
-       return topicRepository.findOne(id);
+       return topicDAO.findOne(id);
     }
 
     public void addTopic(Topic topic) {
-        topicRepository.save(topic);
+        topicDAO.save(topic);
     }
 
     public void updateTopic(String id, Topic topic) {
 
-        topicRepository.save(topic);//repository finds the topic and updated if it exists, if not it inserts
+        topicDAO.save(topic);//repository finds the topic and updated if it exists, if not it inserts
     }
 
     public void deleteTopic(String id) {
 //        topics.removeIf(t -> t.getId().equals(id));
-        topicRepository.delete(id);
+        topicDAO.delete(id);
     }
 }
