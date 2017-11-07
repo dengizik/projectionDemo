@@ -1,6 +1,6 @@
 package com.lbs.data.demo.courses;
 
-import com.lbs.data.demo.topic.Topic;
+import com.lbs.data.demo.topic.model.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 public class CourseController {
+
 
     @Autowired
     private CourseService courseService;
@@ -26,13 +27,13 @@ public class CourseController {
 
     @RequestMapping(value = "/topics/{topicId}/courses", method = RequestMethod.POST)
     public void addCourse(@RequestBody Course course, @PathVariable String topicId){
-        course.setTopic(new Topic(topicId,"",""));
+        //course.setTopic(new Topic(topicId,"",""));
         courseService.addCourse(course);
     }
 
     @RequestMapping(value="/topics/{topicId}/courses/{id}", method = RequestMethod.PUT)
     public void updateCourse(@RequestBody Course course, @PathVariable String topicId, @PathVariable String id){
-        course.setTopic(new Topic(topicId, "",""));
+        //course.setTopic(new Topic(topicId, "",""));
         courseService.updateCourse(course);
     }
 

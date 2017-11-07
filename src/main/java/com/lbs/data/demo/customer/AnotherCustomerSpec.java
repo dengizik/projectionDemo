@@ -25,12 +25,7 @@ public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> cq,
         p.getExpressions()
         .add(cb.equal(root.get("id"), filter.getId()));
         }
-//
-//        if (filter.getSurname() != null && filter.getAge() != null) {
-//        p.getExpressions().add(
-//        cb.and(cb.equal(root.get("surname"), filter.getSurname()),
-//        cb.equal(root.get("age"), filter.getAge())));
-//        }
+
 
         return p;
 

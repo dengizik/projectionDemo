@@ -1,6 +1,6 @@
 package com.lbs.data.demo.courses;
 
-import com.lbs.data.demo.topic.Topic;
+import com.lbs.data.demo.topic.model.entity.Topic;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -36,7 +36,7 @@ public class Course {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.topic = new Topic(topicId,"","");
+        //this.topic = new Topic(topicId,"","");
     }
 
     public String getId() {

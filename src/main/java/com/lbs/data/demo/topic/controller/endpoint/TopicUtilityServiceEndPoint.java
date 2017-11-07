@@ -1,4 +1,4 @@
-package com.lbs.data.demo.topic.controller;
+package com.lbs.data.demo.topic.controller.endpoint;
 
 public class TopicUtilityServiceEndPoint {
 

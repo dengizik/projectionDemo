@@ -3,6 +3,7 @@ package com.lbs.data.demo.topic.config;
 import java.util.ArrayList;
 import java.util.List;
 
+//@Configuration
 public class RestEndPointConfig {
 
     private List<RestEndPoint> restEndPoints = new ArrayList<>();

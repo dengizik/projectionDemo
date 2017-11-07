@@ -1,10 +1,10 @@
-package com.lbs.data.demo.topic.error;
+package com.lbs.data.demo.topic.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 
-    private Long resourceId;
+    private String resourceId;
 
-    public ResourceNotFoundException(Long resourceId, String message) {
+    public ResourceNotFoundException(String resourceId, String message) {
         super(message);
         this.resourceId = resourceId;
     }

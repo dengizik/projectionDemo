@@ -1,4 +1,4 @@
-package com.lbs.data.demo.topic;
+package com.lbs.data.demo.topic.model;
 
 import java.lang.annotation.*;
 
