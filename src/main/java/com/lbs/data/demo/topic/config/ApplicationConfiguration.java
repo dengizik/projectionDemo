@@ -41,12 +41,12 @@ public class ApplicationConfiguration implements ResourceLoaderAware {
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
     private final Logger logger = LbsLogger.getLogger(ApplicationConfiguration.class);
 
-    private AnnotatedClasses annotatedClasses = new AnnotatedClasses();
-
     @Autowired
     private ApplicationContext appContext;
 
     AnnotationConfigWebApplicationContext annotationConfigWebApplicationContext = new AnnotationConfigWebApplicationContext();
+
+    HashMap<String, String> bufferHM = new HashMap<>();
 
     @Bean
     public RestEndPointConfig searchConfig() throws ClassNotFoundException {//TODO: annotation scan yapacaksın
@@ -71,14 +71,10 @@ public class ApplicationConfiguration implements ResourceLoaderAware {
                 ProjectionWithSpecification pr = object.getClass().getAnnotation(ProjectionWithSpecification.class);
                 pr.projector();
                 logger.info(pr.projector());
-                HashMap<String, String> bufferHM = new HashMap<>();
 
                 bufferHM.put(aClassWithAnnotationProjectWSpec,pr.projector());
                //bufferHM'i application context'a koymaya çalışıyorum
-                //AnnotationConfigWebApplicationContext.getBean("myString");
 
-                annotatedClasses.setAnnotatedClasses(bufferHM);
-                //annotationConfigWebApplicationContext.register(AnnotatedClasses.class);
             }catch (Exception e){
                 logger.error(e.getLocalizedMessage());
             }
@@ -108,7 +104,10 @@ public class ApplicationConfiguration implements ResourceLoaderAware {
         return bindPropertiesToTarget(RestEndPointConfig.class, null, "classpath:/config/search/search-config.yml");
     }
 
-
+    @Bean("annotatedClass")
+    public HashMap<String, String> getString() {
+        return bufferHM;
+    }
 
     private <T> T bindPropertiesToTarget(Class<T> clazz, String prefix, String... locations) {
         try {

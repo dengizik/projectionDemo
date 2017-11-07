@@ -28,7 +28,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @DiscriminatorValue(value = "LbsBankAccount")
-@ProjectionWithSpecification( projector = "")
 public class LbsBankAccount extends LbsAccount {
 
     @Size(max = 30)

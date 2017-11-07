@@ -55,9 +55,7 @@ public class TopicServiceImpl implements TopicService {
     public Page<TopicProjector> getAllSimpleTopics(String id){
         HashMap<String, String> annotatedClasses = new HashMap<String, String>();
         try{
-            annotatedClasses = (HashMap<String, String>) ContextProvider.getBean("myString");
-            hashMap = (HashMap<String, String>) context.getBean("myString");
-//            annotatedClasses = (HashMap<String, String>) appContext.getBean("annotatedClasses");
+            hashMap = (HashMap<String, String>) context.getBean("annotatedClass");
         }catch(Exception e){
             logger.error(e.getLocalizedMessage());
         }
